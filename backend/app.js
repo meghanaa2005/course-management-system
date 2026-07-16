@@ -9,6 +9,7 @@ require("./config/db");
 console.log("Before Routes");
 
 const studentRoutes = require("./routes/studentRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 console.log("After Routes");
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/students", studentRoutes);
+app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend Running Successfully 🚀");
