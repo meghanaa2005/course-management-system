@@ -1,12 +1,18 @@
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const db = require("../config/db");
-const registerUser =  async (req, res) => {
+
+
+// Register API
+const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
 
-    const sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-     
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+
     db.query(sql, [username, email, hashedPassword], (err, result) => {
+
         if (err) {
             return res.status(500).json(err);
         }
@@ -17,16 +23,20 @@ const registerUser =  async (req, res) => {
     });
 };
 
-const loginUser =  async (req, res) => {
+
+// Login API
+const loginUser = async (req, res) => {
+
     const { email, password } = req.body;
 
     const sql = "SELECT * FROM users WHERE email = ?";
-     
-    const isMatch = await bcrypt.compare(password, result[0].password);
-    db.query(sql, [email], (err, result) => {
+
+    db.query(sql, [email], async (err, result) => {
+
         if (err) {
             return res.status(500).json(err);
         }
+
 
         if (result.length === 0) {
             return res.status(404).json({
@@ -34,19 +44,42 @@ const loginUser =  async (req, res) => {
             });
         }
 
+
+        const isMatch = await bcrypt.compare(
+            password,
+            result[0].password
+        );
+
+
         if (!isMatch) {
             return res.status(401).json({
                 message: "Invalid password"
             });
         }
 
+
+        const token = jwt.sign(
+            {
+                id: result[0].id,
+                email: result[0].email
+            },
+            "mySecretKey",
+            {
+                expiresIn: "1h"
+            }
+        );
+
+
         res.json({
-            message: "Login successful"
+            message: "Login successful",
+            token: token
         });
+
     });
 };
 
+
 module.exports = {
     registerUser,
-      loginUser
+    loginUser
 };
