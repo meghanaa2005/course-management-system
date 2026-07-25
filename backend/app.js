@@ -1,3 +1,4 @@
+const courseRoutes = require("./routes/courseRoutes");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use("/students", studentRoutes);
 app.use("/auth", authRoutes);
+app.use("/courses", courseRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend Running Successfully 🚀");
