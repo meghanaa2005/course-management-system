@@ -5,12 +5,14 @@ const verifyToken = require("../middleware/authMiddleware");
 
 const {
     getAllCourses,
-     addCourse,
-      updateCourse,
-      deleteCourse
+    addCourse,
+    updateCourse,
+    deleteCourse,
+    searchCourses
 } = require("../controllers/courseController");
 
 router.get("/", verifyToken, getAllCourses);
+router.get("/search", verifyToken, searchCourses);
 router.post("/", verifyToken, addCourse); 
 router.put("/:id", verifyToken, updateCourse);
 router.delete("/:id", verifyToken, deleteCourse);

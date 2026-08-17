@@ -85,9 +85,25 @@ const deleteCourse = (req, res) => {
 
 };
 
+const searchCourses = (req, res) => {
+
+    const { name } = req.query;
+
+    const sql = "SELECT * FROM courses WHERE course_name LIKE ?";
+
+    db.query(sql, [`%${name}%`], (err, result) => {
+
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        res.json(result);
+    });
+};
 module.exports = {
     getAllCourses,
       addCourse,
        updateCourse,
-       deleteCourse
+       deleteCourse,
+       searchCourses
 };

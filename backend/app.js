@@ -1,3 +1,6 @@
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
+const facultyRoutes = require("./routes/facultyRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const express = require("express");
 const cors = require("cors");
@@ -22,6 +25,9 @@ app.use(express.json());
 app.use("/students", studentRoutes);
 app.use("/auth", authRoutes);
 app.use("/courses", courseRoutes);
+app.use("/faculty", facultyRoutes);
+app.use("/enrollments", enrollmentRoutes);
+app.use("/dashboard", dashboardRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend Running Successfully 🚀");

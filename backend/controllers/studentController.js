@@ -77,9 +77,26 @@ const deleteStudent = (req, res) => {
     });
 };
 
+const searchStudents = (req, res) => {
+
+    const { name } = req.query;
+
+    const sql = "SELECT * FROM students WHERE name LIKE ?";
+
+    db.query(sql, [`%${name}%`], (err, result) => {
+
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        res.json(result);
+    });
+};
+
 module.exports = {
     getAllStudents,
     addStudent,
      updateStudent,
-    deleteStudent
+    deleteStudent,
+    searchStudents
 };
