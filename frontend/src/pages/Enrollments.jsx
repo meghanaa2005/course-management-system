@@ -24,7 +24,7 @@ function Enrollments() {
             const token = localStorage.getItem("token");
 
             const response = await axios.get(
-                "http://localhost:5000/enrollments",
+                `${import.meta.env.VITE_API_URL}/enrollments`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -54,8 +54,7 @@ function Enrollments() {
             const token = localStorage.getItem("token");
 
             const response = await axios.get(
-                "http://localhost:5000/students",
-                {
+                `${import.meta.env.VITE_API_URL}/students`,                {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -80,7 +79,7 @@ function Enrollments() {
             const token = localStorage.getItem("token");
 
             const response = await axios.get(
-                "http://localhost:5000/courses",
+               `${import.meta.env.VITE_API_URL}/courses`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -117,7 +116,7 @@ function Enrollments() {
             const token = localStorage.getItem("token");
 
             await axios.post(
-                "http://localhost:5000/enrollments",
+                `${import.meta.env.VITE_API_URL}/enrollments`,
                 {
                     student_id: studentId,
                     course_id: courseId
@@ -163,7 +162,7 @@ function Enrollments() {
             const token = localStorage.getItem("token");
 
             await axios.delete(
-                `http://localhost:5000/enrollments/${id}`,
+                `${import.meta.env.VITE_API_URL}/enrollments/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

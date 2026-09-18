@@ -24,7 +24,7 @@ function Courses() {
             const token = localStorage.getItem("token");
 
             const response = await axios.get(
-                "http://localhost:5000/courses",
+               `${import.meta.env.VITE_API_URL}/courses`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -61,7 +61,7 @@ function Courses() {
             const token = localStorage.getItem("token");
 
             await axios.post(
-                "http://localhost:5000/courses",
+              `${import.meta.env.VITE_API_URL}/courses`,
                 {
                     course_name: courseName,
                     course_code: courseCode,
@@ -117,8 +117,7 @@ function Courses() {
             const token = localStorage.getItem("token");
 
             await axios.put(
-                `http://localhost:5000/courses/${editId}`,
-                {
+                `${import.meta.env.VITE_API_URL}/courses/${editId}`,                {
                     course_name: courseName,
                     course_code: courseCode,
                     credits: Number(credits)
@@ -164,7 +163,7 @@ function Courses() {
             const token = localStorage.getItem("token");
 
             await axios.delete(
-                `http://localhost:5000/courses/${id}`,
+               `${import.meta.env.VITE_API_URL}/courses/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

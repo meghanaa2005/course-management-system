@@ -27,7 +27,7 @@ function Students() {
             const token = localStorage.getItem("token");
 
             const response = await axios.get(
-                "http://localhost:5000/students",
+                  `${import.meta.env.VITE_API_URL}/students`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -67,7 +67,7 @@ function Students() {
             const token = localStorage.getItem("token");
 
             await axios.post(
-                "http://localhost:5000/students",
+                `${import.meta.env.VITE_API_URL}/students`,
                 {
                     name,
                     email,
@@ -129,7 +129,7 @@ function Students() {
             const token = localStorage.getItem("token");
 
             await axios.put(
-                `http://localhost:5000/students/${editId}`,
+                `${import.meta.env.VITE_API_URL}/students/${editId}`,
                 {
                     name,
                     email,
@@ -179,7 +179,7 @@ function Students() {
             const token = localStorage.getItem("token");
 
             await axios.delete(
-                `http://localhost:5000/students/${id}`,
+               `${import.meta.env.VITE_API_URL}/students/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

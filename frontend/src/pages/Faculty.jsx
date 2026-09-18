@@ -22,7 +22,7 @@ function Faculty() {
             const token = localStorage.getItem("token");
 
             const response = await axios.get(
-                "http://localhost:5000/faculty",
+                `${import.meta.env.VITE_API_URL}/faculty`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ function Faculty() {
             const token = localStorage.getItem("token");
 
             await axios.post(
-                "http://localhost:5000/faculty",
+                `${import.meta.env.VITE_API_URL}/faculty`,
                 {
                     name,
                     email,
@@ -109,7 +109,7 @@ function Faculty() {
             const token = localStorage.getItem("token");
 
             await axios.put(
-                `http://localhost:5000/faculty/${editId}`,
+                `${import.meta.env.VITE_API_URL}/faculty/${editId}`,
                 {
                     name,
                     email,
@@ -151,7 +151,7 @@ function Faculty() {
             const token = localStorage.getItem("token");
 
             await axios.delete(
-                `http://localhost:5000/faculty/${id}`,
+                `${import.meta.env.VITE_API_URL}/faculty/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

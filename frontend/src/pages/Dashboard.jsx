@@ -28,30 +28,29 @@ function Dashboard() {
                     },
                 };
 
-                const [
-                    studentsResponse,
-                    coursesResponse,
-                    facultyResponse,
-                    enrollmentsResponse,
-                ] = await Promise.all([
-                    axios.get(
-                        "http://localhost:5000/students",
-                        config
-                    ),
-                    axios.get(
-                        "http://localhost:5000/courses",
-                        config
-                    ),
-                    axios.get(
-                        "http://localhost:5000/faculty",
-                        config
-                    ),
-                    axios.get(
-                        "http://localhost:5000/enrollments",
-                        config
-                    ),
-                ]);
-
+               const [
+    studentsResponse,
+    coursesResponse,
+    facultyResponse,
+    enrollmentsResponse,
+] = await Promise.all([
+    axios.get(
+        `${import.meta.env.VITE_API_URL}/students`,
+        config
+    ),
+    axios.get(
+        `${import.meta.env.VITE_API_URL}/courses`,
+        config
+    ),
+    axios.get(
+        `${import.meta.env.VITE_API_URL}/faculty`,
+        config
+    ),
+    axios.get(
+        `${import.meta.env.VITE_API_URL}/enrollments`,
+        config
+    ),
+]);
                 // =========================
                 // STATISTICS
                 // =========================
