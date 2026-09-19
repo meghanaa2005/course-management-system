@@ -2,42 +2,41 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Signup() {
 
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
 
         e.preventDefault();
 
         try {
 
             const response = await axios.post(
-                `${import.meta.env.VITE_API_URL}/auth/login`,
+                `${import.meta.env.VITE_API_URL}/auth/register`,
                 {
+                    username,
                     email,
                     password
                 }
             );
 
-            localStorage.setItem(
-                "token",
-                response.data.token
-            );
+            setMessage(response.data.message);
 
-            setMessage("Login successful!");
-
-            navigate("/dashboard");
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
 
         } catch (error) {
 
             setMessage(
                 error.response?.data?.message ||
-                "Login failed"
+                "Registration failed"
             );
         }
     };
@@ -49,9 +48,19 @@ function Login() {
 
                 <h1>🎓 Student Course</h1>
 
-                <h2>Management System</h2>
+                <h2>Create Account</h2>
 
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleSignup}>
+
+                    <input
+                        type="text"
+                        placeholder="Enter Username"
+                        value={username}
+                        onChange={(e) =>
+                            setUsername(e.target.value)
+                        }
+                        required
+                    />
 
                     <input
                         type="email"
@@ -74,20 +83,10 @@ function Login() {
                     />
 
                     <button type="submit">
-                        Login
+                        Sign Up
                     </button>
 
                 </form>
-            
-              <p>
-    Don't have an account?{" "}
-    <button
-        type="button"
-        onClick={() => navigate("/signup")}
-    >
-        Sign Up
-    </button>
-</p>
 
                 {message && (
                     <p className="login-message">
@@ -95,10 +94,20 @@ function Login() {
                     </p>
                 )}
 
+                <p>
+                    Already have an account?{" "}
+                    <button
+                        type="button"
+                        onClick={() => navigate("/")}
+                    >
+                        Login
+                    </button>
+                </p>
+
             </div>
 
         </div>
     );
 }
 
-export default Login;
+export default Signup;

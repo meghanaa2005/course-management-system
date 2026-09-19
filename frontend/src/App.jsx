@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Students from "./pages/Students";
 import Courses from "./pages/Courses";
@@ -17,6 +18,7 @@ function App() {
 
                 {/* Login - Navbar & Sidebar vaddu */}
                 <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
 
                 {/* Common Layout */}
                 <Route element={<MainLayout />}>
